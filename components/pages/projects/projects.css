@@ -1,0 +1,29 @@
+.projects h1:nth-child(1) {
+    color: rgb(0, 255, 0);
+    font-size: 30px;
+}
+
+
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 50px 0;
+}
+
+.project {
+    border: 1px solid white;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 100;
+    color: white;
+    width: 400px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.project:hover {
+    background: white;
+    color: black;
+}

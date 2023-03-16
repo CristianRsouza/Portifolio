@@ -1,0 +1,33 @@
+.Home p {
+    padding: 5px 0;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    width: 0; /* começar com largura 0 para o efeito de digitação */
+    animation: typing 3s steps(40, end) forwards; /* forwards faz com que a animação mantenha o estado final (largura 100%) */
+  }
+  
+  .Home .HomeFirst {
+    animation-delay: 0s; /* começar imediatamente */
+  }
+  
+  .Home .MyName {
+    animation-delay: 0.5s; /* começar após a primeira linha terminar (duração de 3 segundos) */
+    font-size: 30px;
+    color: rgb(0, 255, 0);
+  }
+  
+  .Home .HomeLast {
+    animation-delay: 2s; /* começar após a segunda linha terminar (duração de 3 segundos) */
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  

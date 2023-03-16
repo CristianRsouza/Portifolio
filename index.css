@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  background: linear-gradient(45deg,#0077ff, rgb(93, 0, 255));
+  background-attachment: fixed;
+  overflow: hidden;
+  padding: 100px 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

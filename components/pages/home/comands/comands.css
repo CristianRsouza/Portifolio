@@ -1,0 +1,104 @@
+.Comands {
+    margin: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 40px 30px;
+    width: 100%;
+}
+
+@keyframes showCommand {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+
+    }
+}
+
+.Comands {
+    width: 400px;
+}
+
+.Comand h1, .ComandsTitle h1 {
+    border: 1px solid white;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+}
+
+.Comand,.ComandsTitle {
+    opacity: 0;
+    text-decoration: none;
+}
+
+.Comand h1:hover {
+    background: white;
+    color: black;
+}
+.ComandsTitle h1:hover {
+    background: white;
+    color: black;
+}
+
+.ComandsTitle {
+    animation: showCommand 1s 0.5s steps(1, end) forwards;
+}
+
+.Comands .Comand:nth-child(1) {
+    animation: showCommand 1s 0.5s steps(1, end) forwards;
+
+}
+.Comands .Comand:nth-child(2) {
+    animation: showCommand 1s 1s steps(1, end) forwards;
+
+}
+.Comands .Comand:nth-child(3) {
+    animation: showCommand 1s 1.5s steps(1, end) forwards;
+
+}
+.Comands .Comand:nth-child(4) {
+    animation: showCommand 1s 2s steps(1, end) forwards;
+
+}
+/* 
+.Comands h1 {
+    font-size: 15px;
+    padding: 14px 0;
+}
+
+.Comands .ComandsTitle h1{
+    border: 4px solid white;
+    width: 300px;
+    cursor: pointer;
+    animation: showCommand 1s 0s steps(1, end) forwards;
+    text-align: center;
+}
+
+.Comands .Comand {
+    border: 1px solid white;
+    width: 300px;
+    opacity: 0;
+    text-align: center;
+}
+
+.Comands .Comand:hover {
+    background: white;
+    color: black;
+    cursor: pointer;
+}
+
+.Comands .Comand:nth-child(2) {
+    animation: showCommand 1s 0.5s steps(1, end) forwards;
+}
+
+.Comands .Comand:nth-child(3) {
+    animation: showCommand 1s 1s steps(1, end) forwards;
+}
+
+.Comands .Comand:nth-child(4) {
+    animation: showCommand 1s 1.5s steps(1, end) forwards;
+} */

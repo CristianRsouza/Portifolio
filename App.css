@@ -1,0 +1,31 @@
+.Home, .skills, .projects, .aboutme, .contact {
+    background: black;
+    padding: 40px;
+    height: 500px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 90vw;
+}
+
+li {
+    list-style-type: none;
+}
+
+header {
+    background: white;
+    color: black;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 0 15px;
+}
+
+header div {
+    background: red;
+    text-align: center;
+    padding: 10px 40px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

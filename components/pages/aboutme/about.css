@@ -1,0 +1,80 @@
+.aboutme h1:nth-child(1) {
+    font-size: 30px;
+    color: rgb(0, 255, 0);
+}
+
+.about {
+    padding: 50px 0;
+}
+
+.about p{
+    padding: 5px 0;
+    width: 400px;
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    width: 0;
+}
+
+.about p:nth-child(1) {
+    animation: aboutme 5s 0s steps(50, end) forwards;
+
+}
+.about p:nth-child(2) {
+    animation: aboutme 5s 3.5s steps(50, end) forwards;
+
+}
+.about p:nth-child(3) {
+    animation: aboutme 5s 7.5s steps(50, end) forwards;
+
+}
+
+@keyframes aboutme {
+    from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+}
+
+.social {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.social a {
+    border: 1px solid white;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 100;
+    color: white;
+        opacity: 0;
+        width: 400px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.social a:nth-child(1) {
+    animation: social 1s 9s steps(1,end) forwards;
+}
+.social a:nth-child(2) {
+    animation: social 1s 9.5s steps(1,end) forwards;
+}
+
+
+@keyframes social {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.social a:hover {
+    color: black;
+    background: white;
+}

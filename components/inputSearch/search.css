@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+
+.InputSearch {
+    display: flex;
+    width: 100%;
+    background: black;
+    padding: 20px;
+}
+
+.InputSearch input {
+    font-family: 'Press Start 2P', cursive;
+    background: transparent;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    border: none;
+    animation: none 1s;
+    width: 100%;
+}
+
