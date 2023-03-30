@@ -7,9 +7,11 @@
     width: 90vw;
 }
 
+
 li {
     list-style-type: none;
 }
+
 
 header {
     background: white;
@@ -20,6 +22,7 @@ header {
     align-items: center;
     padding: 0 0 0 15px;
 }
+
 
 header div {
     background: red;
