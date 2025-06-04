@@ -22,8 +22,30 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.key.toLowerCase() in keysPressed) keysPressed[e.key.toLowerCase()] = false;
   });
 
+  function isCollidingWithAnyTree() {
+    const charBox = document.getElementById('character-colision').getBoundingClientRect();
+    const treeBoxes = document.querySelectorAll('.tree-colision');
+
+    for (let tree of treeBoxes) {
+      const treeBox = tree.getBoundingClientRect();
+
+      const isColliding =
+        charBox.right > treeBox.left &&
+        charBox.left < treeBox.right &&
+        charBox.bottom > treeBox.top &&
+        charBox.top < treeBox.bottom;
+
+      if (isColliding) return true;
+    }
+
+    return false;
+  }
+
   function mover() {
     const isMoving = keysPressed.w || keysPressed.a || keysPressed.s || keysPressed.d;
+
+    const prevX = charX;
+    const prevY = charY;
 
     if (keysPressed.w) {
       charY -= velocidade;
@@ -43,17 +65,18 @@ window.addEventListener('DOMContentLoaded', () => {
       currentDirection = 'side';
       sideDirection = 'right';
     }
-
-    const maxX = cenario.offsetWidth - character.offsetWidth;
-    const maxY = cenario.offsetHeight - character.offsetHeight;
-
-    if (charX < 0) charX = 0;
-    if (charY < 0) charY = 0;
-    if (charX > maxX) charX = maxX;
-    if (charY > maxY) charY = maxY;
-
+ 
     character.style.left = charX + 'px';
     character.style.top = charY + 'px';
+
+  
+    if (isCollidingWithAnyTree()) {
+ 
+      charX = prevX;
+      charY = prevY;
+      character.style.left = charX + 'px';
+      character.style.top = charY + 'px';
+    }
 
     if (sideDirection === 'left') {
       characterImg.style.transform = 'scaleX(-1)';
