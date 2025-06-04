@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const keysPressed = { w: false, a: false, s: false, d: false };
 
   let charX = 900;
-  let charY = 700;
+  let charY = 500;
 
   document.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() in keysPressed) keysPressed[e.key.toLowerCase()] = true;
@@ -66,10 +66,9 @@ window.addEventListener('DOMContentLoaded', () => {
       sideDirection = 'right';
     }
  
-    character.style.left = charX + 'px';
+    character.style.left = charX+  'px';
     character.style.top = charY + 'px';
 
-  
     if (isCollidingWithAnyTree()) {
  
       charX = prevX;

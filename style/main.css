@@ -8,7 +8,86 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+   background: #000000; 
 }
+
+body.sunrise {
+  animation: sunrise 4s ease;
+
+}
+
+@keyframes sunrise {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+#menu-inicial {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.menu-box {
+  padding: 40px 60px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  animation: fade 3s ease-in;
+}
+
+.menu-box p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.menu-box h1 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.menu-box button {
+  font-size: 40px;
+  padding: 30px 50px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffd588;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: 0.3s ease;
+  border: 10px solid #eb8109;
+  outline: 5px solid #6d2002;
+  box-shadow: inset 0 0 1px 5px #6d2002; 
+  transition: 0.5s;
+}
+.menu-box button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+
 .border-cena {
   position: absolute;
   width: 100vw;
