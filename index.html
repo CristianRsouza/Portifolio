@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Document</title>
   <link rel="stylesheet" href="./style/main.css" />
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -18,6 +21,16 @@
 </div>
 
   <div class="border-cena"></div>
+  <div class="header">
+    <button onclick="showCard('Who')">Quem Sou eu?</button>
+    <button onclick="showCard('What')">O que eu ja fiz?</button>
+    <button onclick="showCard('Knowledge')">O que eu sei Fazer?</button>
+    <button onclick="showCard('History')">Minha historia</button>
+    <button onclick="showCard('Contato')">Contato</button>
+  </div>
+
+  <div id="card">
+  </div>
 
 <div id="camera"></div>
   <div class="cenario" id="cenario">
@@ -40,5 +53,6 @@
   <script src="./script/sobreposition.js"></script>
   <script src="./script/generateTree.js"></script>
   <script src="./script/colision.js"></script>
+  <script src="./script/cards.js"></script>
 </body>
 </html>
