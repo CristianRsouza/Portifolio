@@ -3,7 +3,7 @@ const card = document.getElementById('card');
 function showCard(prop) {
   card.style.top = '100%';
 
-  if (prop === 'Who') {
+    if (prop === 'Who') {
     card.innerHTML = `
       <h1>Quem sou eu?</h1>
       <br>
@@ -76,7 +76,6 @@ function showCard(prop) {
     `;
   }
 
-  // Depois de inserir o conteúdo, adiciona o listener ao botão fechar:
   const closeButton = document.getElementById('close');
   if (closeButton) {
     closeButton.addEventListener('click', closeCard);
