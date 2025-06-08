@@ -41,7 +41,44 @@ window.addEventListener('DOMContentLoaded', () => {
     return false;
   }
 
+  function expandirCenarioSeNecessario() {
+    const margem = 200;
+    const buffer = 1000;
+
+    let expandiuParaDireita = false;
+    let expandiuParaBaixo = false;
+    let expandiuParaEsquerda = false;
+    let expandiuParaCima = false;
+
+    const direita = charX + character.offsetWidth;
+    const inferior = charY + character.offsetHeight;
+
+    if (direita > cenario.offsetWidth - margem) {
+      cenario.style.width = (cenario.offsetWidth + buffer) + 'px';
+      expandiuParaDireita = true;
+    }
+    if (inferior > cenario.offsetHeight - margem) {
+      cenario.style.height = (cenario.offsetHeight + buffer) + 'px';
+      expandiuParaBaixo = true;
+    }
+
+    if (charX < margem) {
+      charX += buffer;
+      cenario.style.width = (cenario.offsetWidth + buffer) + 'px';
+      cenario.style.left = (parseInt(cenario.style.left || 0) - buffer) + 'px';
+      expandiuParaEsquerda = true;
+    }
+    if (charY < margem) {
+      charY += buffer;
+      cenario.style.height = (cenario.offsetHeight + buffer) + 'px';
+      cenario.style.top = (parseInt(cenario.style.top || 0) - buffer) + 'px';
+      expandiuParaCima = true;
+    }
+  }
+
   function mover() {
+    expandirCenarioSeNecessario();
+
     const isMoving = keysPressed.w || keysPressed.a || keysPressed.s || keysPressed.d;
 
     const prevX = charX;
@@ -65,12 +102,11 @@ window.addEventListener('DOMContentLoaded', () => {
       currentDirection = 'side';
       sideDirection = 'right';
     }
- 
-    character.style.left = charX+  'px';
+
+    character.style.left = charX + 'px';
     character.style.top = charY + 'px';
 
     if (isCollidingWithAnyTree()) {
- 
       charX = prevX;
       charY = prevY;
       character.style.left = charX + 'px';
@@ -109,8 +145,11 @@ window.addEventListener('DOMContentLoaded', () => {
     cenario.style.left = cenarioX + 'px';
     cenario.style.top = cenarioY + 'px';
 
+    atualizarRenderArvores(cenarioX, cenarioY);
+
     requestAnimationFrame(mover);
   }
 
+  gerarArvoresMundo();
   mover();
 });
