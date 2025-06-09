@@ -1,5 +1,6 @@
 const card = document.getElementById('card');
 
+
 function showCard(prop) {
   card.style.top = '100%';
 
