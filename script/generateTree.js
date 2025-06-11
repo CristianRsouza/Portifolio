@@ -30,7 +30,7 @@ function criarElementoArvore(tree) {
 
   treeContainer.innerHTML = `
     <div class="tree-colision" id="tree-colision-${tree.id}" data-tree-id="${tree.id}"></div>
-    <img class="tree" src="../Portifolio/images/tree.png" alt="Tree" width="${tree.width}" height="${tree.height}" />
+    <img class="tree" src="./images/tree.png" alt="Tree" width="${tree.width}" height="${tree.height}" />
     <div class="tree-shadow"></div>
     <div class="tree-event" data-id="${tree.id}"></div>
   `;
