@@ -1,8 +1,9 @@
-var tuturial = document.getElementById('tuturial')
+const tuturial = document.getElementById('tuturial')
 
-document.addEventListener('keydown', (e) => {
-  if (e.key) {
-        tuturial.style.left = '-50%'
+var close = false
 
-    }
-});
+window.addEventListener('keydown', (e) => {
+  tuturial.style.left = '-50%'
+  close = true
+} )
+

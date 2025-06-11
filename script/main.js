@@ -8,7 +8,6 @@ window.addEventListener('DOMContentLoaded', () => {
   let isWalking = false;
   let currentDirection = 'down';
   let sideDirection = 'right';
-
   const keysPressed = { w: false, a: false, s: false, d: false };
 
   let charX = 900;
@@ -45,89 +44,105 @@ window.addEventListener('DOMContentLoaded', () => {
     const margem = 200;
     const buffer = 1000;
 
-    let expandiuParaDireita = false;
-    let expandiuParaBaixo = false;
-    let expandiuParaEsquerda = false;
-    let expandiuParaCima = false;
-
     const direita = charX + character.offsetWidth;
     const inferior = charY + character.offsetHeight;
 
     if (direita > cenario.offsetWidth - margem) {
       cenario.style.width = (cenario.offsetWidth + buffer) + 'px';
-      expandiuParaDireita = true;
     }
     if (inferior > cenario.offsetHeight - margem) {
       cenario.style.height = (cenario.offsetHeight + buffer) + 'px';
-      expandiuParaBaixo = true;
     }
 
     if (charX < margem) {
       charX += buffer;
       cenario.style.width = (cenario.offsetWidth + buffer) + 'px';
       cenario.style.left = (parseInt(cenario.style.left || 0) - buffer) + 'px';
-      expandiuParaEsquerda = true;
     }
     if (charY < margem) {
       charY += buffer;
       cenario.style.height = (cenario.offsetHeight + buffer) + 'px';
       cenario.style.top = (parseInt(cenario.style.top || 0) - buffer) + 'px';
-      expandiuParaCima = true;
     }
   }
 
-  function mover() {
-    expandirCenarioSeNecessario();
+  function estaPertoDoTronco(playerRect, treeRect) {
+    const troncoY = treeRect.top + treeRect.height / 2;
+    const troncoHeight = treeRect.height / 2;
 
-    const isMoving = keysPressed.w || keysPressed.a || keysPressed.s || keysPressed.d;
+    return (
+      playerRect.left < treeRect.right &&
+      playerRect.right > treeRect.left &&
+      playerRect.top < troncoY + troncoHeight &&
+      playerRect.bottom > troncoY
+    );
+  }
 
-    const prevX = charX;
-    const prevY = charY;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'e') {
+      const playerRect = character.getBoundingClientRect();
+      const todasArvores = document.querySelectorAll('.tree-colision');
 
-    if (keysPressed.w) {
-      charY -= velocidade;
-      currentDirection = 'up';
-    }
-    if (keysPressed.s) {
-      charY += velocidade;
-      currentDirection = 'down';
-    }
-    if (keysPressed.a) {
-      charX -= velocidade;
-      currentDirection = 'side';
-      sideDirection = 'left';
-    }
-    if (keysPressed.d) {
-      charX += velocidade;
-      currentDirection = 'side';
-      sideDirection = 'right';
-    }
+      let cortou = false;
 
+      todasArvores.forEach((domTree) => {
+        const treeRect = domTree.getBoundingClientRect();
+        const id = Number(domTree.dataset.treeId?.replace('tree-colision-', ''));
+
+        const tree = arvores.find(t => t.id === id);
+        if (!tree || tree.vida <= 0) return;
+
+        if (estaPertoDoTronco(playerRect, treeRect)) {
+          destroyTree(currentTool, charX, charY);
+          cortou = true;
+        }
+      });
+
+      if (!cortou) {
+      }
+    }
+  });
+
+function mover() {
+  expandirCenarioSeNecessario();
+
+  const isMoving = keysPressed.w || keysPressed.a || keysPressed.s || keysPressed.d;
+
+  const prevX = charX;
+  const prevY = charY;
+
+  if (keysPressed.w) { charY -= velocidade; currentDirection = 'up'; }
+  if (keysPressed.s) { charY += velocidade; currentDirection = 'down'; }
+  if (keysPressed.a) { charX -= velocidade; currentDirection = 'side'; sideDirection = 'left'; }
+  if (keysPressed.d) { charX += velocidade; currentDirection = 'side'; sideDirection = 'right'; }
+
+  character.style.left = charX + 'px';
+  character.style.top = charY + 'px';
+
+  if (isCollidingWithAnyTree()) {
+    charX = prevX;
+    charY = prevY;
     character.style.left = charX + 'px';
     character.style.top = charY + 'px';
+  }
 
-    if (isCollidingWithAnyTree()) {
-      charX = prevX;
-      charY = prevY;
-      character.style.left = charX + 'px';
-      character.style.top = charY + 'px';
-    }
+ // vira personagem
+characterImg.style.transform = sideDirection === 'left' ? 'scaleX(-1)' : 'scaleX(1)';
 
-    if (sideDirection === 'left') {
-      characterImg.style.transform = 'scaleX(-1)';
-    } else {
-      characterImg.style.transform = 'scaleX(1)';
-    }
+// Exemplo para virar horizontalmente mantendo escala e rotação
+tool.style.transform = sideDirection === 'left' 
+  ? 'scaleX(1) scale(3) rotate(-40deg)' 
+  : 'scaleX(-1) scale(3) rotate(-40deg)';
 
-    if (isMoving && !isWalking) {
-      characterImg.src = `./images/character-walk-${currentDirection}.gif?${Date.now()}`;
-      isWalking = true;
-    }
-    if (!isMoving && isWalking) {
-      characterImg.src = `./images/character-idle-${currentDirection}.gif`;
-      isWalking = false;
-    }
 
+  if (isMoving && !isWalking) {
+    characterImg.src = `./images/character-walk-${currentDirection}.gif?${Date.now()}`;
+    isWalking = true;
+  }
+  if (!isMoving && isWalking) {
+    characterImg.src = `./images/character-idle-${currentDirection}.gif`;
+    isWalking = false;
+  }
     const cameraCenterX = camera.offsetWidth / 2;
     const cameraCenterY = camera.offsetHeight / 2;
 

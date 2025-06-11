@@ -6,9 +6,9 @@ const treeWidthBase = 100;
 const treeHeightBase = 150;
 const sizeVariation = 0.3;
 
-const spacingX = 400;
-const spacingY = 300;
-const jitter = 300;
+const spacingX = 480;
+const spacingY = 380;
+const jitter = 500;
 
 const margemRender = 600;
 const mundoWidth = 8000; 
@@ -19,7 +19,7 @@ let id = 0;
 const arvores = [];
 
 function criarElementoArvore(tree) {
-  if (tree.domElement) return;  
+  if (tree.domElement) return;
 
   const treeContainer = document.createElement('div');
   treeContainer.classList.add('container-tree');
@@ -29,23 +29,22 @@ function criarElementoArvore(tree) {
   treeContainer.style.zIndex = Math.floor(tree.y);
 
   treeContainer.innerHTML = `
-    <div class="tree-colision" id="tree-colision-${tree.id}"></div>
-    <img class="tree" src="../images/tree.png" alt="Tree" width="${tree.width}" height="${tree.height}" />
+    <div class="tree-colision" id="tree-colision-${tree.id}" data-tree-id="${tree.id}"></div>
+    <img class="tree" src="../Portifolio/images/tree.png" alt="Tree" width="${tree.width}" height="${tree.height}" />
     <div class="tree-shadow"></div>
+    <div class="tree-event" data-id="${tree.id}"></div>
   `;
 
   cenario.appendChild(treeContainer);
   tree.domElement = treeContainer;
 }
 
-// Função que remove o elemento DOM da árvore
 function removerElementoArvore(tree) {
   if (!tree.domElement) return;
   cenario.removeChild(tree.domElement);
   tree.domElement = null;
 }
 
-// Gerar posições fixas para o mundo todo
 function gerarArvoresMundo() {
   const cols = Math.ceil(mundoWidth / spacingX);
   const rows = Math.ceil(mundoHeight / spacingY);
@@ -67,11 +66,51 @@ function gerarArvoresMundo() {
         y,
         width,
         height,
+        vida: 100,
         domElement: null
       });
     }
   }
 }
+function getClosestTreeEvent(playerX, playerY, maxDistance = 250) {
+  let arvoreMaisProxima = null;
+  let menorDistancia = maxDistance;
+
+  for (const tree of arvores) {
+    if (!tree.domElement || tree.vida <= 0) continue;
+
+    const treeBaseX = tree.x + tree.width / 2;
+    const treeBaseY = tree.y + tree.height; // base da árvore, não o centro
+
+    const dx = treeBaseX - playerX;
+    const dy = treeBaseY - playerY;
+    const distancia = Math.sqrt(dx * dx + dy * dy);
+
+    if (distancia < menorDistancia) {
+      menorDistancia = distancia;
+      arvoreMaisProxima = tree;
+    }
+  }
+
+  return arvoreMaisProxima;
+}
+
+function estaPertoDoTronco(playerRect, treeRect) {
+  const troncoY = treeRect.top + treeRect.height / 2;
+  const troncoHeight = treeRect.height / 2;
+
+  const horizontalDist = Math.abs((playerRect.left + playerRect.width / 2) - (treeRect.left + treeRect.width / 2));
+  const maxHorizontalDistance = 100; // ajuste conforme necessário
+
+  return (
+    horizontalDist <= maxHorizontalDistance &&
+    playerRect.left < treeRect.right &&
+    playerRect.right > treeRect.left &&
+    playerRect.top < troncoY + troncoHeight &&
+    playerRect.bottom > troncoY
+  );
+}
+
 
 function atualizarRenderArvores(cenarioX, cenarioY) {
   const areaVisivel = {

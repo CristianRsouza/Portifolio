@@ -330,6 +330,55 @@ body.sunrise {
   z-index: 150;
   border-radius: 5px;
 }
+.tree-hit-flash {
+  animation: tree-hit-flash 200ms ease-out;
+}
+
+.tree-shake {
+  animation: tree-hit-shake 200ms ease-out;
+}
+
+@keyframes tree-hit-flash {
+  0%, 100% {
+    filter: saturate(1) hue-rotate(0deg);
+  }
+  50% {
+    filter: saturate(3) hue-rotate(330deg); /* tom avermelhado */
+  }
+}
+
+.tree-hit-flash {
+  animation: tree-hit-flash 200ms ease-out forwards;
+}
+
+@keyframes tree-hit-flash {
+  0% {
+     filter: sepia(1) saturate(3) hue-rotate(-15deg);
+
+  }
+  50% {
+    filter: brightness(0.5) sepia(1) saturate(10) hue-rotate(-30deg);
+    transform: translateX(4px) rotate(3deg); 
+  }
+  100% {
+      filter: sepia(1) saturate(3) hue-rotate(-15deg);
+
+  }
+}
+
+.item-icon {
+  width: 60px;
+}
+
+#tool {
+  display: inline-block; 
+  transition: transform 0.2s ease; 
+}
+.tree-event {
+  width: 100%;
+  height: 100%;
+  z-index: 1300;
+}
 
 .tree-shadow {
       width: 60%;
@@ -379,6 +428,8 @@ user-select: none;
   height: 100px;
 user-select: none;
   animation: character 5s 1s infinite;
+   transform-origin: center center; 
+  transition: transform 0.1s ease; 
 }
 
 .character-colision {
@@ -393,6 +444,18 @@ user-select: none;
   z-index: 1000;      
 }
 
+
+
+
+.tool {
+  position: absolute;
+  top: 60%;
+  left: 40%;
+  z-index: 1400;
+  transform-origin: center center;
+  transform: scale(3) rotate(-40deg);
+  transition: transform 0.2s ease;
+}
 
 #camera {
   position: absolute;
